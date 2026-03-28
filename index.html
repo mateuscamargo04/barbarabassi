@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bárbara Bassi | Beleza & Estética Facial — Matão SP</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --rose:#C9856A;
+  --rose-light:#D4997F;
+  --rose-pale:#F0D5C8;
+  --gold:#C4965A;
+  --cream:#FAF6F2;
+  --warm:#F5EDE6;
+  --dark:#2A1F1A;
+  --mid:#8A7068;
+  --light-text:#BBA99F;
+  --black:#1A1210;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--dark);font-family:'Jost',sans-serif;overflow-x:hidden;cursor:none}
+ 
+/* CURSOR */
+.cursor{position:fixed;width:8px;height:8px;background:var(--rose);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,opacity 0.3s}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(201,133,106,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease}
+.cursor.hover{width:50px;height:50px;background:rgba(201,133,106,0.15)}
+ 
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:9000;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1s,visibility 1s}
+#loader.gone{opacity:0;visibility:hidden}
+.l-script{font-family:'Great Vibes',cursive;font-size:5rem;color:var(--rose-pale);opacity:0;animation:fadeIn 1s 0.3s ease forwards}
+.l-line{width:0;height:1px;background:rgba(201,133,106,0.4);margin-top:2rem;animation:growLine 1.8s 0.5s ease forwards}
+.l-sub{font-size:0.6rem;letter-spacing:8px;text-transform:uppercase;color:rgba(201,133,106,0.4);margin-top:1rem;opacity:0;animation:fadeIn 0.5s 1s ease forwards}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes growLine{to{width:250px}}
+ 
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:2rem 6vw;display:flex;justify-content:space-between;align-items:center;transition:all 0.5s}
+nav.scrolled{background:rgba(250,246,242,0.95);backdrop-filter:blur(20px);padding:1.2rem 6vw;border-bottom:1px solid rgba(201,133,106,0.15)}
+.nav-logo{font-family:'Great Vibes',cursive;font-size:1.8rem;color:var(--rose)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--mid);text-decoration:none;font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;font-weight:500;transition:color 0.3s}
+.nav-links a:hover{color:var(--rose)}
+.nav-cta{background:var(--rose);color:#fff;padding:0.7rem 2rem;text-decoration:none;font-size:0.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;border-radius:30px;transition:all 0.3s}
+.nav-cta:hover{background:var(--rose-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,133,106,0.3)}
+ 
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;background:var(--dark)}
+.hero-left{position:relative;overflow:hidden}
+.hero-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&q=80') center/cover;opacity:0.5;filter:saturate(0.7)}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(26,18,16,0.3),rgba(26,18,16,0.8))}
+.hero-right{display:flex;flex-direction:column;justify-content:center;padding:10rem 6vw 6rem 4vw;position:relative;z-index:2}
+.hero-tag{font-size:0.6rem;letter-spacing:8px;text-transform:uppercase;color:rgba(201,133,106,0.7);margin-bottom:2rem;display:flex;align-items:center;gap:1.5rem;opacity:0;animation:fadeUp 1s 2.3s ease forwards}
+.hero-tag::before{content:'';width:30px;height:1px;background:var(--rose)}
+.hero-name{font-family:'Great Vibes',cursive;font-size:clamp(3.5rem,7vw,6rem);color:var(--rose-pale);line-height:1;margin-bottom:0.5rem;opacity:0;animation:fadeUp 1s 2.5s ease forwards}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2.5vw,1.5rem);font-weight:300;letter-spacing:10px;text-transform:uppercase;color:rgba(250,246,242,0.5);margin-bottom:2rem;opacity:0;animation:fadeUp 1s 2.7s ease forwards}
+.hero-divider{width:60px;height:1px;background:var(--rose);margin-bottom:2rem;opacity:0;animation:fadeUp 1s 2.9s ease forwards}
+.hero-desc{font-size:0.95rem;font-weight:300;line-height:2.2;color:rgba(250,246,242,0.55);max-width:380px;margin-bottom:3rem;opacity:0;animation:fadeUp 1s 3.1s ease forwards}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp 1s 3.3s ease forwards}
+.btn-rose{background:var(--rose);color:#fff;padding:1rem 2.5rem;text-decoration:none;font-size:0.7rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;border-radius:30px;transition:all 0.3s}
+.btn-rose:hover{background:var(--rose-light);transform:translateY(-3px);box-shadow:0 12px 32px rgba(201,133,106,0.4)}
+.btn-outline-light{border:1px solid rgba(250,246,242,0.2);color:rgba(250,246,242,0.7);padding:1rem 2.5rem;text-decoration:none;font-size:0.7rem;font-weight:300;letter-spacing:3px;text-transform:uppercase;border-radius:30px;transition:all 0.3s}
+.btn-outline-light:hover{border-color:var(--rose);color:var(--rose-pale)}
+.hero-since{position:absolute;bottom:3rem;left:3rem;text-align:center;z-index:2}
+.since-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(201,133,106,0.3);line-height:1}
+.since-label{font-size:0.55rem;letter-spacing:5px;text-transform:uppercase;color:rgba(201,133,106,0.4)}
+ 
+/* MARQUEE */
+.marquee-wrap{background:var(--rose);padding:1rem 0;overflow:hidden}
+.marquee-inner{display:inline-flex;animation:marquee 25s linear infinite;white-space:nowrap}
+.marquee-item{font-size:0.7rem;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,0.85);padding:0 3rem;display:flex;align-items:center;gap:3rem;font-weight:300}
+.marquee-item::after{content:'✦';font-size:0.5rem;opacity:0.5}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+ 
+/* SECTIONS */
+.section{padding:8rem 6vw;position:relative}
+.section-max{max-width:1200px;margin:0 auto}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s ease,transform 1s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-l{opacity:0;transform:translateX(-40px);transition:opacity 1s ease,transform 1s ease}
+.reveal-l.in{opacity:1;transform:translateX(0)}
+.tag{font-size:0.6rem;letter-spacing:6px;text-transform:uppercase;color:var(--rose);margin-bottom:1.5rem;display:flex;align-items:center;gap:1.5rem}
+.tag::before{content:'';width:30px;height:1px;background:var(--rose)}
+.big-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,5.5rem);font-weight:300;line-height:1;margin-bottom:2rem}
+.big-title em{font-style:italic;color:var(--rose)}
+.big-title strong{font-weight:600}
+ 
+/* ABOUT */
+.about-bg{background:var(--warm)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center;margin-top:3rem}
+.about-img-wrap{position:relative}
+.about-photo{width:100%;aspect-ratio:3/4;object-fit:cover;filter:saturate(0.85);display:block}
+.about-frame{position:absolute;top:2rem;left:-2rem;right:2rem;bottom:-2rem;border:1px solid rgba(201,133,106,0.2);z-index:-1}
+.about-pill{position:absolute;top:2rem;right:-1rem;background:var(--rose);color:#fff;padding:1rem 1.5rem;text-align:center;border-radius:4px}
+.ap-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;line-height:1}
+.ap-label{font-size:0.55rem;letter-spacing:3px;text-transform:uppercase;opacity:0.85;margin-top:0.3rem}
+.about-body p{font-size:1rem;font-weight:300;line-height:2.2;color:var(--mid);margin-bottom:1.5rem}
+.feature-list{display:flex;flex-direction:column;gap:0.75rem;margin-top:2rem}
+.feat{display:flex;align-items:center;gap:1.25rem;padding:1rem 1.5rem;background:var(--cream);border-left:2px solid transparent;transition:all 0.3s}
+.feat:hover{border-left-color:var(--rose);background:#fff;transform:translateX(6px)}
+.feat-icon{font-size:1rem;min-width:20px}
+.feat-text{font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:var(--dark)}
+ 
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem}
+.service-card{background:#fff;padding:3rem 2rem;position:relative;overflow:hidden;transition:all 0.4s;border:1px solid rgba(201,133,106,0.1)}
+.service-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--rose);transform:scaleX(0);transition:transform 0.4s;transform-origin:center}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(201,133,106,0.15)}
+.service-card:hover::after{transform:scaleX(1)}
+.s-icon{font-size:2rem;margin-bottom:1.5rem}
+.s-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:1rem;color:var(--dark)}
+.s-desc{font-size:0.85rem;font-weight:300;line-height:1.9;color:var(--mid)}
+.s-cta{display:inline-flex;align-items:center;gap:0.5rem;margin-top:1.5rem;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--rose);font-weight:500;text-decoration:none;transition:gap 0.3s}
+.s-cta:hover{gap:1rem}
+ 
+/* DEPOIMENTOS */
+.reviews-bg{background:var(--dark)}
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:4rem}
+.review-card{background:rgba(250,246,242,0.04);border:1px solid rgba(201,133,106,0.1);padding:2.5rem;transition:all 0.3s}
+.review-card:hover{border-color:rgba(201,133,106,0.3);background:rgba(201,133,106,0.04)}
+.stars{color:var(--rose);font-size:0.75rem;letter-spacing:3px;margin-bottom:1.5rem}
+.review-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;font-weight:300;line-height:1.8;color:rgba(250,246,242,0.7)}
+.review-author{margin-top:1.5rem;font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--rose);font-weight:500}
+ 
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--rose) 0%,var(--gold) 100%);padding:8rem 6vw;text-align:center}
+.cta-title{font-family:'Great Vibes',cursive;font-size:clamp(4rem,10vw,8rem);color:#fff;line-height:1;margin-bottom:1rem;text-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.cta-sub{font-size:0.75rem;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:3rem;font-weight:300}
+.btn-white{background:#fff;color:var(--rose);padding:1.1rem 3rem;text-decoration:none;font-size:0.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;border-radius:30px;transition:all 0.3s;display:inline-block}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.2)}
+ 
+/* LOCATION */
+.location-bg{background:var(--warm)}
+.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:4rem;align-items:start}
+.info-block{margin-bottom:2.5rem}
+.i-label{font-size:0.6rem;letter-spacing:5px;text-transform:uppercase;color:var(--rose);margin-bottom:0.6rem}
+.i-val{font-size:1rem;font-weight:300;color:var(--dark);line-height:1.7}
+.map-frame{overflow:hidden;border-radius:4px;height:100%;min-height:420px;box-shadow:0 20px 60px rgba(201,133,106,0.15)}
+.map-frame iframe{width:100%;height:100%;min-height:420px;border:none;filter:saturate(0.6)}
+ 
+/* FOOTER */
+footer{background:var(--dark);padding:5rem 6vw 3rem}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
+.footer-brand{font-family:'Great Vibes',cursive;font-size:2.5rem;color:var(--rose-pale);margin-bottom:1rem}
+.footer-tagline{font-size:0.75rem;font-weight:300;color:var(--light-text);line-height:1.8;max-width:280px}
+.footer-title{font-size:0.6rem;letter-spacing:5px;text-transform:uppercase;color:var(--rose);margin-bottom:1.5rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.75rem}
+.footer-links a{color:var(--light-text);text-decoration:none;font-size:0.8rem;font-weight:300;transition:color 0.3s}
+.footer-links a:hover{color:var(--rose-pale)}
+.footer-bottom{border-top:1px solid rgba(250,246,242,0.06);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,246,242,0.2)}
+ 
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:500;background:var(--rose);color:#fff;padding:0.9rem 1.5rem;text-decoration:none;font-size:0.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;border-radius:30px;transition:all 0.3s;display:flex;align-items:center;gap:0.75rem;box-shadow:0 8px 32px rgba(201,133,106,0.4)}
+.wa-float:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(201,133,106,0.5)}
+.wa-dot{width:8px;height:8px;background:rgba(255,255,255,0.8);border-radius:50%;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:0.5}}
+ 
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+ 
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-left{display:none}
+  .hero-right{padding:9rem 6vw 5rem}
+  .about-grid,.location-grid{grid-template-columns:1fr;gap:3rem}
+  .services-grid,.reviews-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .nav-links{display:none}
+  nav{padding:1.5rem 5vw}
+  .about-pill{display:none}
+}
+</style>
+</head>
+<body>
+ 
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cring"></div>
+ 
+<!-- LOADER -->
+<div id="loader">
+  <div class="l-script">Bárbara Bassi</div>
+  <div class="l-line"></div>
+  <div class="l-sub">Beleza & Estética Facial · Desde 2018</div>
+</div>
+ 
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Bárbara Bassi</div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#localizacao">Localização</a></li>
+  </ul>
+  <a href="https://api.whatsapp.com/send?phone=5516997760836&text=Olá%20Bárbara!%20Gostaria%20de%20agendar%20um%20horário." class="nav-cta" target="_blank">Agendar</a>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="hero-img"></div>
+    <div class="hero-img-overlay"></div>
+    <div class="hero-since">
+      <div class="since-num">2018</div>
+      <div class="since-label">Desde sempre cuidando de você</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-tag">Matão, SP · Beleza & Estética</div>
+    <div class="hero-name">Bárbara Bassi</div>
+    <div class="hero-title">Beleza & Estética Facial</div>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">Especialista em sobrancelhas, cílios e limpeza de pele. Sua melhor versão começa aqui, com cuidado e técnica desde 2018.</p>
+    <div class="hero-btns">
+      <a href="https://api.whatsapp.com/send?phone=5516997760836&text=Olá%20Bárbara!%20Gostaria%20de%20agendar%20um%20horário." class="btn-rose" target="_blank">💬 Agendar pelo WhatsApp</a>
+      <a href="#servicos" class="btn-outline-light">Ver Serviços</a>
+    </div>
+  </div>
+</section>
+ 
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <div class="marquee-item">Bárbara Bassi</div>
+    <div class="marquee-item">Sobrancelhas</div>
+    <div class="marquee-item">Cílios Tufinho</div>
+    <div class="marquee-item">Limpeza de Pele</div>
+    <div class="marquee-item">Pzonioterapia</div>
+    <div class="marquee-item">Desde 2018</div>
+    <div class="marquee-item">Matão SP</div>
+    <div class="marquee-item">Bárbara Bassi</div>
+    <div class="marquee-item">Sobrancelhas</div>
+    <div class="marquee-item">Cílios Tufinho</div>
+    <div class="marquee-item">Limpeza de Pele</div>
+    <div class="marquee-item">Pzonioterapia</div>
+    <div class="marquee-item">Desde 2018</div>
+    <div class="marquee-item">Matão SP</div>
+  </div>
+</div>
+ 
+<!-- SOBRE -->
+<section class="section about-bg" id="sobre">
+  <div class="section-max">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal-l">
+        <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80" alt="Bárbara Bassi" class="about-photo">
+        <div class="about-frame"></div>
+        <div class="about-pill">
+          <div class="ap-num">7+</div>
+          <div class="ap-label">Anos de experiência</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="tag">Quem sou eu</div>
+        <h2 class="big-title">Especialista<br>em fazer você<br><em>brilhar</em></h2>
+        <p style="font-size:1rem;font-weight:300;line-height:2.2;color:var(--mid);margin-bottom:1rem">Desde 2018 me dedico a realçar a beleza natural de cada cliente com técnica, cuidado e atenção aos detalhes. Cada atendimento é único, porque cada rosto é único.</p>
+        <p style="font-size:1rem;font-weight:300;line-height:2.2;color:var(--mid)">Com mais de 2.400 seguidores no Instagram e anos de experiência, ofereço o melhor em estética facial aqui em Matão.</p>
+        <div class="feature-list">
+          <div class="feat"><div class="feat-icon">✦</div><div class="feat-text">Especialista em sobrancelhas</div></div>
+          <div class="feat"><div class="feat-icon">✦</div><div class="feat-text">Cílios em tela & cílios tufinho</div></div>
+          <div class="feat"><div class="feat-icon">✦</div><div class="feat-text">Limpeza de pele com pzonioterapia</div></div>
+          <div class="feat"><div class="feat-icon">✦</div><div class="feat-text">Atendimento personalizado</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- SERVIÇOS -->
+<section class="section" id="servicos">
+  <div class="section-max">
+    <div class="tag reveal">O que ofereço</div>
+    <h2 class="big-title reveal"><strong>Serviços</strong><br><em>exclusivos</em></h2>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="s-icon">✨</div>
+        <div class="s-name">Sobrancelhas</div>
+        <p class="s-desc">Design personalizado que realça o seu olhar e enquadra perfeitamente o seu rosto. Técnica e precisão em cada traço.</p>
+        <a href="https://api.whatsapp.com/send?phone=5516997760836&text=Olá%20Bárbara!%20Quero%20agendar%20sobrancelha." class="s-cta" target="_blank">Agendar →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="s-icon">👁️</div>
+        <div class="s-name">Cílios em Tela & Tufinho</div>
+        <p class="s-desc">Volume, curvatura e naturalidade para o seu olhar. Aplicação cuidadosa para um resultado deslumbrante e duradouro.</p>
+        <a href="https://api.whatsapp.com/send?phone=5516997760836&text=Olá%20Bárbara!%20Quero%20agendar%20extensão%20de%20cílios." class="s-cta" target="_blank">Agendar →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="s-icon">🌿</div>
+        <div class="s-name">Limpeza de Pele</div>
+        <p class="s-desc">Limpeza profunda com pzonioterapia para uma pele renovada, limpa e radiante. Cuide da sua pele com quem entende.</p>
+        <a href="https://api.whatsapp.com/send?phone=5516997760836&text=Olá%20Bárbara!%20Quero%20agendar%20limpeza%20de%20pele." class="s-cta" target="_blank">Agendar →</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- DEPOIMENTOS -->
+<section class="section reviews-bg" id="depoimentos">
+  <div class="section-max">
+    <div class="tag reveal" style="color:var(--rose-pale)">O que dizem</div>
+    <h2 class="big-title reveal" style="color:var(--cream)">Clientes<br><em>felizes</em></h2>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"A Bárbara é incrível! Minhas sobrancelhas nunca ficaram tão perfeitas. Atendimento impecável e resultado maravilhoso."</p>
+        <div class="review-author">Cliente fiel</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Fiz extensão de cílios e amei demais! Ficou natural e durável. Com certeza voltarei sempre. Super recomendo!"</p>
+        <div class="review-author">Cliente satisfeita</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"A limpeza de pele com pzonioterapia transformou minha pele. Profissional dedicada, espaço aconchegante e resultado incrível!"</p>
+        <div class="review-author">Cliente encantada</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-title reveal">Agende já!</div>
+  <div class="cta-sub reveal">Sua melhor versão está a uma mensagem de distância</div>
+  <a href="https://api.whatsapp.com/send?phone=5516997760836&text=Olá%20Bárbara!%20Gostaria%20de%20agendar%20um%20horário." class="btn-white reveal" target="_blank">💬 Falar com a Bárbara</a>
+</div>
+ 
+<!-- LOCALIZAÇÃO -->
+<section class="section location-bg" id="localizacao">
+  <div class="section-max">
+    <div class="tag reveal">Onde estou</div>
+    <h2 class="big-title reveal">Venha me<br><em>visitar</em></h2>
+    <div class="location-grid">
+      <div class="reveal">
+        <div class="info-block">
+          <div class="i-label">Endereço</div>
+          <div class="i-val">Rua Dorival Pereira Ribeiro, 601<br>Jardim Santa Rosa — Matão, SP<br>CEP 15995-042</div>
+        </div>
+        <div class="info-block">
+          <div class="i-label">WhatsApp</div>
+          <div class="i-val">(16) 99776-0836</div>
+        </div>
+        <div class="info-block">
+          <div class="i-label">Instagram</div>
+          <div class="i-val">@espaco_barbara_bassi_</div>
+        </div>
+        <div class="info-block">
+          <div class="i-label">Agendamento</div>
+          <div class="i-val">Pelo WhatsApp — clique no botão e a mensagem já vem pronta!</div>
+        </div>
+        <a href="https://api.whatsapp.com/send?phone=5516997760836&text=Olá%20Bárbara!%20Gostaria%20de%20agendar%20um%20horário." class="btn-rose" style="display:inline-block;margin-top:1rem" target="_blank">💬 Agendar agora</a>
+      </div>
+      <div class="map-frame reveal">
+        <iframe src="https://maps.google.com/maps?q=Rua+Dorival+Pereira+Ribeiro,+601,+Jardim+Santa+Rosa,+Matão+SP&output=embed" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Bárbara Bassi</div>
+        <p class="footer-tagline">Especialista em beleza e estética facial em Matão, SP. Sobrancelhas, cílios e limpeza de pele desde 2018.</p>
+      </div>
+      <div>
+        <div class="footer-title">Serviços</div>
+        <ul class="footer-links">
+          <li><a href="#servicos">Sobrancelhas</a></li>
+          <li><a href="#servicos">Cílios em Tela</a></li>
+          <li><a href="#servicos">Cílios Tufinho</a></li>
+          <li><a href="#servicos">Limpeza de Pele</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Contato</div>
+        <ul class="footer-links">
+          <li><a href="#localizacao">Matão, SP</a></li>
+          <li><a href="https://api.whatsapp.com/send?phone=5516997760836" target="_blank">(16) 99776-0836</a></li>
+          <li><a href="https://instagram.com/espaco_barbara_bassi_" target="_blank">Instagram</a></li>
+          <li><a href="#localizacao">Ver no mapa</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Bárbara Bassi Beleza & Estética · Matão, SP</div>
+      <div class="footer-copy">Desde 2018 cuidando de você</div>
+    </div>
+  </div>
+</footer>
+ 
+<!-- WA FLOAT -->
+<a href="https://api.whatsapp.com/send?phone=5516997760836&text=Olá%20Bárbara!%20Gostaria%20de%20agendar%20um%20horário." class="wa-float" target="_blank">
+  <div class="wa-dot"></div>
+  Agendar agora
+</a>
+ 
+<script>
+// LOADER
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('loader').classList.add('gone')},2400)});
+ 
+// CURSOR
+const cur=document.getElementById('cursor'),cr=document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.service-card,.feat').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.classList.add('hover');cr.style.width='60px';cr.style.height='60px'});
+  el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');cr.style.width='40px';cr.style.height='40px'});
+});
+ 
+// NAV
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)});
+ 
+// REVEAL
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('in');obs.unobserve(el.target)}})},{threshold:0.12});
+document.querySelectorAll('.reveal,.reveal-l').forEach(el=>obs.observe(el));
+ 
+// PARALLAX
+window.addEventListener('scroll',()=>{
+  const img=document.querySelector('.hero-img');
+  if(img)img.style.transform=`scale(1.1) translateY(${window.scrollY*0.08}px)`;
+});
+</script>
+</body>
+</html>
